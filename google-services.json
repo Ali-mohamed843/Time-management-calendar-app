@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560555843024",
+    "project_id": "calendar-fd6c3",
+    "storage_bucket": "calendar-fd6c3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560555843024:android:5d2b542e0a7be1c3d8edd5",
+        "android_client_info": {
+          "package_name": "com.alimoo23.instagram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpAV48JLjsj0svyZ2g_N-zf8LB8O6n2Ww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
