@@ -1,50 +1,62 @@
-# Welcome to your Expo app 👋
+📅 Event & Calendar App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A complete Event and Calendar mobile application built with Expo & React Native.
 
-## Get started
+Note: This project is named instagram in package.json but operates as a fully functional feature-rich Calendar and Event Management application.
 
-1. Install dependencies
+📋 Overview
 
-   ```bash
-   npm install
-   ```
+A modern and sleek mobile app to help users manage their daily tasks, schedule events, and set reminders efficiently. It features an intuitive and visually appealing interface with custom calendar views and intelligent time management tools.
 
-2. Start the app
+Data is backed by Firebase Realtime Database and secured with authentication.
 
-   ```bash
-   npx expo start
-   ```
+✨ Features
+Interactive Calendar View
 
-In the output, you'll find options to open the app in a
+Visual monthly calendar to view and track all scheduled events
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Quick navigation between dates and access to detailed daily schedules
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Event Management
 
-## Get a fresh project
+Add, edit, and manage daily events and meetings
 
-When you're ready, run:
+Support for location, all-day events, and precise time ranges (From / To)
 
-```bash
-npm run reset-project
-```
+Real-Time Synchronization
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Live event updates with statuses such as pending, in progress, and done
 
-## Learn more
+Powered by Firebase Realtime Database
 
-To learn more about developing your project with Expo, look at the following resources:
+Smart Reminders & Notifications
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Local and push notifications using Notifee and Firebase Cloud Messaging (FCM)
 
-## Join the community
+Custom reminder timings (minutes/hours before events)
 
-Join our community of developers creating universal apps.
+Authentication
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Full login and registration system using Firebase Authentication
+
+UI / UX
+
+Built with NativeWind (Tailwind CSS for React Native)
+
+Smooth modals, bottom sheets, and custom date/time pickers
+
+🛠 Tech Stack
+
+Framework: Expo SDK ~54 / React Native 0.81.5
+
+Routing: Expo Router (file-based routing)
+
+Styling: NativeWind / Tailwind CSS
+
+Icons: Lucide React Native
+
+Backend: Firebase (Auth, Realtime Database, Cloud Messaging)
+
+Notifications: Notifee
+
+Calendar UI: react-native-calendars
