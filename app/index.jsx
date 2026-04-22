@@ -12,7 +12,6 @@ export default function OnboardingScreen() {
       <StatusBar barStyle="dark-content" backgroundColor="#E8D5C4" />
       
       <View className="flex-1 items-center justify-between px-6 pt-8 pb-10">
-        {/* Illustration */}
         <View className="flex-1 items-center justify-center w-full">
           <Image
             source={require('../assets/images/bg.png')}
@@ -20,10 +19,7 @@ export default function OnboardingScreen() {
             resizeMode="contain"
           />
         </View>
-
-        {/* Content Section */}
         <View className="w-full">
-          {/* Title */}
           <Text 
             className="text-4xl text-black mb-3 leading-tight"
             style={{ fontFamily: 'Laila-Bold' }}
@@ -31,7 +27,6 @@ export default function OnboardingScreen() {
             Planner, Reminder,{'\n'}Calendar
           </Text>
 
-          {/* Description */}
           <Text 
             className="text-base text-gray-700 mb-8 px-2 leading-relaxed"
             style={{ fontFamily: 'Laila-Regular' }}
@@ -39,10 +34,9 @@ export default function OnboardingScreen() {
             It is more convenient for you to monitor and manage your project timelines.
           </Text>
 
-          {/* Button */}
           <TouchableOpacity
             onPress={handleGetStarted}
-            className="w-full bg-[#8E9766] py-5 rounded-2xl shadow-lg"
+            className="w-full bg-[#8E9766] py-5 rounded-full shadow-lg"
             activeOpacity={0.7}
           >
             <Text 

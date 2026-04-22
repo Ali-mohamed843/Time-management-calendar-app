@@ -1,4 +1,3 @@
-// LoginScreen.js
 import { Calendar, Eye, EyeOff, Lock, Mail } from 'lucide-react-native';
 import { useState } from 'react';
 import {
@@ -24,14 +23,12 @@ const LoginScreen = ({ navigation }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Email validation
     if (!email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email is invalid';
     }
 
-    // Password validation
     if (!password) {
       newErrors.password = 'Password is required';
     } else if (password.length < 6) {
@@ -48,34 +45,36 @@ const LoginScreen = ({ navigation }) => {
     }
 
     setLoading(true);
+    setErrors({}); 
 
     const result = await signIn(email, password);
 
     if (result.success) {
-      Alert.alert('Success', 'Login successful!', [
-        {
-          text: 'OK',
-          onPress: () => router.push('/tabs/home'), // Replace with your main screen name
-        },
-      ]);
+      router.push('/tabs/Main');
     } else {
       let errorMessage = 'An error occurred during login';
 
       if (result.error.code === 'auth/user-not-found') {
         errorMessage = 'No account found with this email';
+        setErrors({ email: errorMessage });
       } else if (result.error.code === 'auth/wrong-password') {
         errorMessage = 'Incorrect password';
+        setErrors({ password: errorMessage });
       } else if (result.error.code === 'auth/invalid-email') {
         errorMessage = 'Invalid email address';
+        setErrors({ email: errorMessage });
       } else if (result.error.code === 'auth/user-disabled') {
         errorMessage = 'This account has been disabled';
+        setErrors({ email: errorMessage });
       } else if (result.error.code === 'auth/too-many-requests') {
         errorMessage = 'Too many attempts. Please try again later';
+        setErrors({ password: errorMessage });
       } else if (result.error.code === 'auth/invalid-credential') {
         errorMessage = 'Invalid email or password';
+        setErrors({ email: errorMessage, password: 'Invalid email or password' });
+      } else {
+        setErrors({ password: errorMessage });
       }
-
-      Alert.alert('Login Failed', errorMessage);
     }
 
     setLoading(false);
@@ -83,12 +82,12 @@ const LoginScreen = ({ navigation }) => {
 
   const handleForgotPassword = async () => {
     if (!email.trim()) {
-      Alert.alert('Error', 'Please enter your email address first');
+      setErrors({ email: 'Please enter your email address first' });
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      Alert.alert('Error', 'Please enter a valid email address');
+      setErrors({ email: 'Please enter a valid email address' });
       return;
     }
 
@@ -106,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
         errorMessage = 'No account found with this email';
       }
 
-      Alert.alert('Error', errorMessage);
+      setErrors({ email: errorMessage });
     }
   };
 
@@ -116,7 +115,6 @@ const LoginScreen = ({ navigation }) => {
 
       <SafeAreaView className="flex-1">
         <View className="flex-1 px-8 justify-center">
-          {/* Logo/Icon */}
           <View className="items-center mb-12">
             <View className="w-24 h-24 bg-white/20 rounded-3xl items-center justify-center mb-4">
               <Calendar size={48} color="#FFFFFF" />
@@ -125,12 +123,10 @@ const LoginScreen = ({ navigation }) => {
             <Text className="text-white/80 text-base mt-2">Sign in to continue</Text>
           </View>
 
-          {/* Login Form */}
           <View className="space-y-4">
-            {/* Email Input */}
             <View>
               <Text className="text-white text-sm font-medium mb-2">Email</Text>
-              <View className={`flex-row items-center bg-white/10 rounded-2xl px-4 py-4 border ${errors.email ? 'border-red-400' : 'border-white/20'}`}>
+              <View className={`flex-row items-center bg-white/10 rounded-full px-4 py-2 border ${errors.email ? 'border-red-700' : 'border-white/20'}`}>
                 <Mail size={20} color="#FFFFFF" opacity={0.6} />
                 <TextInput
                   className="flex-1 ml-3 text-white text-base"
@@ -145,13 +141,12 @@ const LoginScreen = ({ navigation }) => {
                   autoCapitalize="none"
                 />
               </View>
-              {errors.email && <Text className="text-red-300 text-xs mt-1 ml-2">{errors.email}</Text>}
+              {errors.email && <Text className="text-red-700 text-md mt-1 ml-2">{errors.email}</Text>}
             </View>
 
-            {/* Password Input */}
             <View className="mt-4">
               <Text className="text-white text-sm font-medium mb-2">Password</Text>
-              <View className={`flex-row items-center bg-white/10 rounded-2xl px-4 py-4 border ${errors.password ? 'border-red-400' : 'border-white/20'}`}>
+              <View className={`flex-row items-center bg-white/10 rounded-full px-4 py-2 border ${errors.password ? 'border-red-700' : 'border-white/20'}`}>
                 <Lock size={20} color="#FFFFFF" opacity={0.6} />
                 <TextInput
                   className="flex-1 ml-3 text-white text-base"
@@ -172,17 +167,15 @@ const LoginScreen = ({ navigation }) => {
                   )}
                 </TouchableOpacity>
               </View>
-              {errors.password && <Text className="text-red-300 text-xs mt-1 ml-2">{errors.password}</Text>}
+              {errors.password && <Text className="text-red-700 text-md mt-1 ml-2">{errors.password}</Text>}
             </View>
 
-            {/* Forgot Password */}
-            <TouchableOpacity className="self-end mt-2" onPress={handleForgotPassword}>
+            {/* <TouchableOpacity className="self-end mt-2" onPress={handleForgotPassword}>
               <Text className="text-white text-sm">Forgot Password?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            {/* Login Button */}
             <TouchableOpacity
-              className="bg-[#6B7556] rounded-2xl py-4 mt-6"
+              className="bg-[#6B7556] rounded-full py-4 mt-6"
               onPress={handleLogin}
               activeOpacity={0.8}
               disabled={loading}
@@ -196,21 +189,11 @@ const LoginScreen = ({ navigation }) => {
               )}
             </TouchableOpacity>
 
-            {/* Sign Up Link */}
             <View className="flex-row justify-center items-center mt-6">
               <Text className="text-white/80 text-sm">Don't have an account? </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+              <TouchableOpacity onPress={() => router.push('/auth/Register')}>
                 <Text className="text-white text-sm font-semibold">Sign Up</Text>
               </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Decorative Element */}
-          <View className="absolute bottom-0 left-0 right-0 items-center pb-8">
-            <View className="flex-row space-x-2">
-              <View className="w-2 h-2 bg-white/30 rounded-full" />
-              <View className="w-2 h-2 bg-white rounded-full" />
-              <View className="w-2 h-2 bg-white/30 rounded-full" />
             </View>
           </View>
         </View>
